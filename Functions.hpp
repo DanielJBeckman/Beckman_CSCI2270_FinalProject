@@ -16,18 +16,16 @@
 using namespace std;
 
 
-struct Tree;
+struct Vert;  //Vertex structure prototype.
 
-struct Vert;
-
-struct adjVert{
+struct adjVert{ //Adjacent builder struct for adding edges
     
     int miles;
     
     Vert *v;
 };
 
-struct Vert{
+struct Vert{    //Vert is my vertex building struct. Used in the creation of my city graph and dijkstra alg.
     
     string city;
     
@@ -42,7 +40,8 @@ struct Vert{
     vector <adjVert> adj;};
 
 
-class Route
+class Route  //Route class. Stores my fuctions and BST/Linked List pointers and variables. Functions are described in detail 
+    //in Functions.cpp
 {
 
 private:
