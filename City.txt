@@ -1,0 +1,14 @@
+New York, NULL
+London, NULL
+Paris, NULL
+Madrid, NULL
+Berlin, NULL
+Stockholm, NULL
+Moscow, NULL
+Rome, NULL
+Athens, NULL
+Warsaw,NULL
+Casablanca, NULL
+Cairo, NULL
+Tel Aviv, NULL
+Santa Maria, NULL

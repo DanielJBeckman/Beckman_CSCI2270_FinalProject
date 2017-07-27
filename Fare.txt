@@ -1,0 +1,81 @@
+London,New York,628,N
+London,Paris,291,N
+London,Madrid,456,N
+London,Berlin,502,N
+London,Stockholm,821,N
+London,Moscow,996,N
+London,Rome,759,N
+London,Athens,1201,N
+London,Warsaw,841,N
+London,Casablanca,1101,N
+Paris,New York,736,N
+Paris,London,291,N
+Paris,Madrid,276,N
+Paris,Berlin,585,N
+Paris,Warsaw,602,N
+Paris,Moscow,1400,N
+Paris,Athens,1200,N
+Paris,Casablanca,605,N
+Paris,Rome,295,N
+Madrid,Paris,276,N
+Madrid,London,456,N
+Madrid,Santa Maria,500,N
+Madrid,Rome,196,N
+Madrid,Berlin,564,N
+Madrid,Warsaw,621,N
+Madrid,Athens,321,N
+Madrid,Casablanca,91,N
+Santa Maria,New York,352,N
+Santa Maria,Madrid,500,
+Santa Maria,Rome,489,
+Berlin,London,502,
+Berlin,Paris,586,
+Berlin,Madrid,564,
+Berlin,Moscow,1000,
+Berlin,Stockholm,305,
+Berlin,Warsaw,256,
+Berlin,Athens,962,
+Berlin,Rome,452,
+Stockholm,Berlin,305,
+Stockholm,London,821,
+Stockholm,Moscow,702,
+Moscow,Stockholm,702,
+Moscow,London,996,
+Moscow,Berlin,1000,
+Moscow,Paris,1400,
+Moscow,Warsaw,600,
+Rome,London,759,
+Rome,Berlin,564,
+Rome,Paris,295,
+Rome,Santa Maria,489,
+Rome,Madrid,196,
+Rome,Warsaw,645,
+Rome,Casablanca,201,
+Rome,Athens,250,
+Rome,Tel Aviv,698,
+Rome,Cario,756,
+Athens,Rome,250,
+Athens,London,1201,
+Athens,Warsaw,498,
+Athens,Tel Aviv,450,
+Athens,Casablanca,759,
+Athens,Cairo,350,
+Athens,Berlin,962,
+Athens,Paris,1200,
+Athens,Madrid,321,
+Warsaw,London,841,
+Warsaw,Athens,498,
+Warsaw,Rome,645,
+Warsaw,Berlin,256,
+Warsaw,Paris,602,
+Warsaw,Madrid,621,
+Warsaw,Moscow,600,
+Casablanca,Paris,605,
+Casablanca,Rome,201,
+Casablanca,Madrid,91,
+Casablanca,London,1101,
+Casablanca,Athens,759,n
+Tel Aviv,Rome,698,n
+Tel Aviv,Athens,450,n
+Cairo,Rome,756,
+Cairo,Athens,350,
