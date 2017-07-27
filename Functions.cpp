@@ -237,6 +237,8 @@ void Route::Dijkstra(string starting, string destination){
         exit(1);
     }
 }}}
+
+//A helper function that decides whether or not to follow simulation rules or standard rules.
     
 
 void Route::PrntR(bool sim){
@@ -257,7 +259,7 @@ void Route::PrntR(bool sim){
         end = "New York";
         Dijkstra(strt, end);}
     
-    
+//My eruption scenario. It toggles the simulation conditions on and provides a sub menu.     
     
 }
 
@@ -290,7 +292,7 @@ void Route::Scenario(){
     cout << endl;
     cout << "**********************************************" << endl;
     cout << "Imaginary Airlines has it's entire trans-" << endl;
-    cout << "Atlantic fleet of Boeing 747s park in London." << endl;
+    cout << "Atlantic fleet of Boeing 747s parked in London." << endl;
     cout << "Using Dijkstra's Algorhthm, new alternative " << endl;
     cout << "flight routes have been established. Use the" << endl;
     cout << "menu below to find out the new flight paths to" << endl;
@@ -329,6 +331,8 @@ void Route::Scenario(){
         
 }
 
+//A BST/linklist hybid creator function that stitches together a slightly modified BST builder and a Linked list
+//build algorthm of my own devising.
 
 void Route::BuildT(){
 
@@ -340,11 +344,14 @@ void Route::BuildT(){
     
 }
     
+//Print helper function
+
 void Route::PrntT(){
     
     PrntT(Root);
     
-    
+//Finds first the Leaf containing the city name. Set the leaf to head. Then creates a nodes with the Arrival city name and
+//an airfare pointer 
     
 }
 
@@ -359,7 +366,7 @@ void Route::PrntT(Route *snitch){
 }
 
 
-
+//BST building algorthm. "newLeaf->next = nullptr" was added to setup the link list additions 
 
 void Route::AddT(){
     
@@ -411,6 +418,9 @@ while (getline(inputFile, data, ',').good()){
     }
         
 }
+
+
+//My custom Linked List script. It stitches a linked list to the proper leaf in the BST.
 
 void Route::AddLL(){
     string data;
@@ -473,6 +483,10 @@ Route * Route::search(string Depart){
     
     return nullptr;}
 
+
+
+//Toggles on Price sub-routines in Dijksta and prints the fare price.
+
 void Route::getFare(){
     Price = true;
     PrntR(sim);
@@ -486,6 +500,8 @@ void Route::getFare(){
     
 }
 
+//A summation algorthm that works intandem with a subroutine I wrote into Dijkstra's alg. It pulls the edge between cities as
+//Dijkstra solves the path. Then it sums these to be printed later.
 
 void Route::Sum(string dep, string arr){
     
