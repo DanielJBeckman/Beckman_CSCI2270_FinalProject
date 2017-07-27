@@ -4,6 +4,7 @@
 //
 //  Created by DANIEL BECKMAN on 7/24/17.
 //  Copyright © 2017 DANIEL BECKMAN. All rights reserved.
+//  The file is the flesh out for all functions prototyped in the .hpp 
 //
 #include <iostream>
 #include "Functions.hpp"
@@ -14,7 +15,8 @@
 
 using namespace std;
 
-
+//Constructor - I kept this one pretty sparse. It covers some class pointer implementation and a few house 
+//keeping variables.
 
 Route::Route(){
     
@@ -31,10 +33,12 @@ Route::Route(){
 
 };
 
+//Distructer will be called to destroy the linked lists and the BST. 
+
 Route::~Route(){};
 
 
-
+//Graph builder helper function - Creates Vertices and then links them with edges.
 
 void Route::BuildG(){
     if (!sim){
@@ -46,7 +50,7 @@ void Route::BuildG(){
     }
 
 
-
+//Vertex add function - It uses a while loop to establish a Verticies for every city linked to the route.
 
 void Route::addVert(){
     string data;
@@ -66,7 +70,7 @@ void Route::addVert(){
         getline(inputFile, data);
     }}
     
- 
+ //Edge creator function - stitches the edges together using another text file.
 
 void Route::addEdge(string data){
     string strt;
@@ -98,7 +102,8 @@ void Route::addEdge(string data){
                         av.miles = stoi(mil);
                         vertices[i].adj.push_back(av);}}}}}}
 
- 
+ //A Graph print function that is switched off. It helps understand the nature of the graph but is definately 
+//a developer feature not to be included in the final program
     
 void Route::PrntG(){
     //loop through all vertices and adjacent vertices
@@ -118,7 +123,10 @@ void Route::PrntG(){
     }
 }
 
-    
+//Dijkstra's Alg used in this case to first establish London as a hub and secondly to link people to thier New York destination
+//as efficently as possible. Dijkstra grabs adjacents via BFS then jams them into a cue to be solved. The most efficent route remains while the 
+//others are discontinued or overwritten
+
 void Route::Dijkstra(string starting, string destination){
     
     Vert * start = nullptr;
