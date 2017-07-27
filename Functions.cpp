@@ -52,7 +52,7 @@ void Route::addVert(){
     string data;
     ifstream inputFile;
     inputFile.open("City.txt");
-        //bool found = false;
+    
     
 
     while(getline(inputFile, data, ',').good()){
@@ -274,8 +274,7 @@ void Route::Scenario(){
     cout << "*********************************************" << endl;
     cout << "*****************Press Enter*****************" << endl;
     cin.get();
-    //cin.clear();
-    //cin.ignore();
+    
     cout << endl;
     cout << endl;
     cout << endl;
@@ -291,8 +290,6 @@ void Route::Scenario(){
     cout << "**********************************************" << endl;
     cout << "*****************Press Enter*****************" << endl;
     cin.get();
-    //cin.clear();
-    //cin.ignore();
     cout << endl;
     cout << endl;
     cout << endl;
@@ -315,7 +312,7 @@ void Route::Scenario(){
         switch(choice){
             case 1: PrntR(sim);
                 break;
-            case 2:
+            case 2: getFare();
                 break;
             case 3: cout << "Goodbye!" << endl;
                 break; }}
@@ -374,11 +371,7 @@ while (getline(inputFile, data, ',').good()){
         
             
             
-            //newLeaf->quant = stoi(word);
-            
-            // cout << newLeaf->socre << endl;
-            // cout << newLeaf->title << endl;
-            //cout << newLeaf->year << endl;
+    
             newLeaf->left = nullptr;
             newLeaf->right = nullptr;
             newLeaf->parent = nullptr;
@@ -424,7 +417,7 @@ void Route::AddLL(){
     current = search(data);
     
     if (current->next == nullptr){
-        cout << data << endl;
+        
     
         Route *newNode = new Route;
         newNode->next = nullptr;
@@ -451,46 +444,17 @@ void Route::AddLL(){
 
 
 
-   /* Route *snitch = nullptr;
-    
-    string data;
-    ifstream inputFile;
-    inputFile.open("Fare.txt");
-    Route *walker = nullptr;
-    
-    while (getline(inputFile, data, ',').good()){
-        
-            snitch = search(data);
-        cout << snitch->Dep << endl;
-            walker = snitch;
-    while (walker->next != nullptr){
-            walker = walker->next;}
-        if (snitch->Dep == data){
-            getline(inputFile, data, ',');
-            
-            Route *newNode = new Route;
-            newNode->Arr = data;
-            newNode->next = nullptr;
-            getline(inputFile, data, ',');
-            newNode->Fare = data;
-            
-            walker->next = newNode;
-            getline(inputFile, data);}}}
-   
-*/
+
 
 
 Route * Route::search(string Depart){
     
-    //cout << "Enter Departure City:" << endl;
-    //getline(cin, Depart);
+    
     current = Root;
     
     
     while(current != nullptr){
         
-        // if(current->title == name){
-        //        return current;}
         if(current->Dep > Depart){
             current= current->left;}
         
@@ -532,7 +496,6 @@ void Route::Sum(string dep, string arr){
 
 
 
-    //getch();
 
 
 
