@@ -27,7 +27,7 @@ System Requirements
 This program should run on Mac and in a Unix. 
 
 Daniel Beckman
-Open issues/bugs
-List any known bugs in the project, and any open enhancement requests.
 
+Open issues/bugs
+Make sure warnings are off. The program has several unintialized variables waiting on the user prompt. They do not effect the program.
 
