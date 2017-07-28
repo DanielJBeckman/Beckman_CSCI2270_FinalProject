@@ -4,7 +4,7 @@
 //
 //  Created by DANIEL BECKMAN on 7/24/17.
 //  Copyright © 2017 DANIEL BECKMAN. All rights reserved.
-//  The file is the flesh out for all functions prototyped in the .hpp 
+//  The file is the flesh out for all functions prototyped in the .hpp
 //
 #include <iostream>
 #include "Functions.hpp"
@@ -15,13 +15,13 @@
 
 using namespace std;
 
-//Constructor - I kept this one pretty sparse. It covers some class pointer implementation and a few house 
+//Constructor - I kept this one pretty sparse. It covers some class pointer implementation and a few house
 //keeping variables.
 
 Route::Route(){
     
     Price = false;
-
+    
     sim = false;
     
     Root = nullptr;
@@ -30,12 +30,17 @@ Route::Route(){
     
     next = nullptr;
     
-
+    
 };
 
-//Distructer will be called to destroy the linked lists and the BST. 
+//Distructer will be called to destroy the linked lists and the BST.
 
-Route::~Route(){};
+Route::~Route(){
+
+
+    deltree(Root);
+
+};
 
 
 //Graph builder helper function - Creates Vertices and then links them with edges.
@@ -43,11 +48,11 @@ Route::~Route(){};
 void Route::BuildG(){
     if (!sim){
         addVert();
-    
+        
         addEdge("Routes.txt");}
     else{
         addEdge("Sim.txt");}
-    }
+}
 
 
 //Vertex add function - It uses a while loop to establish a Verticies for every city linked to the route.
@@ -58,7 +63,7 @@ void Route::addVert(){
     inputFile.open("City.txt");
     
     
-
+    
     while(getline(inputFile, data, ',').good()){
         
         Vert v;
@@ -68,9 +73,9 @@ void Route::addVert(){
         v.parent = nullptr;
         vertices.push_back(v);
         getline(inputFile, data);
-    }}
-    
- //Edge creator function - stitches the edges together using another text file.
+    }inputFile.close();}
+
+//Edge creator function - stitches the edges together using another text file.
 
 void Route::addEdge(string data){
     string strt;
@@ -91,8 +96,8 @@ void Route::addEdge(string data){
         for(int i = 0; i < vertices.size(); i++){
             
             if(vertices[i].city == strt){
-
-
+                
+                
                 for(int j = 0; j < vertices.size(); j++){
                     //cout << "\"" << vertices[j].city << "\" \"" << end <<"\"" << j << endl;
                     if(vertices[j].city == end && i != j){
@@ -100,11 +105,12 @@ void Route::addEdge(string data){
                         adjVert av;
                         av.v = &vertices[j];
                         av.miles = stoi(mil);
-                        vertices[i].adj.push_back(av);}}}}}}
+                        vertices[i].adj.push_back(av);}}}}}
+inputFile.close();}
 
- //A Graph print function that is switched off. It helps understand the nature of the graph but is definately 
+//A Graph print function that is switched off. It helps understand the nature of the graph but is definately
 //a developer feature not to be included in the final program
-    
+
 void Route::PrntG(){
     //loop through all vertices and adjacent vertices
     cout<<"============================================================"<<endl;
@@ -113,18 +119,14 @@ void Route::PrntG(){
         for(int j = 0; j < vertices[i].adj.size(); j++){
             cout << vertices[i].adj[j].v->city;
             cout<<" (Distance: "<< vertices[i].adj[j].miles << " miles)" << endl;
-           // <<", visited: "<<vertices[i].adj[j].v->visited<<", parent: ";
-           // if (vertices[i].adj[j].v->parent==nullptr)
-                //cout<<" nullptr)"<<endl;
-          //  else
-                //cout<<vertices[i].adj[j].v->parent->city<<")"<<endl;
+           
         }
         cout<<"============================================================"<<endl;
     }
 }
 
 //Dijkstra's Alg used in this case to first establish London as a hub and secondly to link people to thier New York destination
-//as efficently as possible. Dijkstra grabs adjacents via BFS then jams them into a cue to be solved. The most efficent route remains while the 
+//as efficently as possible. Dijkstra grabs adjacents via BFS then jams them into a cue to be solved. The most efficent route remains while the
 //others are discontinued or overwritten
 
 void Route::Dijkstra(string starting, string destination){
@@ -167,18 +169,18 @@ void Route::Dijkstra(string starting, string destination){
                     //cout<<"-> to "<<v->v->city;
                     if (v->v->visited == false) {
                         //cout<<", not yet solved,";
-                            int dist = u->distance + v->miles;
-                            if (dist < minDistance) {
-                                //cout<<" the minimum distance was "<< minDistance;
-                                minDistance = dist;
-                                minVertex = v->v;
-                                prev = u;
-                                //cout<<" but there is a new minimum distance of "<<dist<<" between "
-                                //<<start->city <<" and "<<minVertex->city<<endl;
-                            }else{//cout<<" the minimum distance is "<<minDistance
-                                //<<" and there is not a new minimum distance "<<dist<<endl;
-                            }
-                    
+                        int dist = u->distance + v->miles;
+                        if (dist < minDistance) {
+                            //cout<<" the minimum distance was "<< minDistance;
+                            minDistance = dist;
+                            minVertex = v->v;
+                            prev = u;
+                            //cout<<" but there is a new minimum distance of "<<dist<<" between "
+                            //<<start->city <<" and "<<minVertex->city<<endl;
+                        }else{//cout<<" the minimum distance is "<<minDistance
+                            //<<" and there is not a new minimum distance "<<dist<<endl;
+                        }
+                        
                     }else{
                         //cout<<" already solved, moving on"<<endl;
                     }
@@ -219,27 +221,30 @@ void Route::Dijkstra(string starting, string destination){
                 for (int i = path.size()-1; i > 0; i--){
                     //cout << path[i]->city << " " << path[i-1]->city << endl;
                     Sum(path[i]->city, path[i-1]->city); }}}
-    
         
-            else{ cout << endl;
-                if(Price){
-                    for (int i = path.size()-1; i > 0; i--){
-                        //cout << path[i]->city << " " << path[i-1]->city << endl;
-                        Sum(path[i]->city, path[i-1]->city);}
-            if (!sim){
-                cout<<"Distance: "<<solved[solved.size()-1]->distance+3470<<endl;}
-            else{cout<<"Minimum Distance: "<<solved[solved.size()-1]->distance<<endl;}
-    }else if (ending!=nullptr){
-        cout<<"start not found"<<endl;
-        exit(1);
-    }else{
-        cout<<"ending not found"<<endl;
-        exit(1);
-    }
-}}}
+        
+        else{ cout << endl;}
+            if(Price){
+                for (int i = path.size()-1; i > 0; i--){
+                    Sum(path[i]->city, path[i-1]->city);}
+                if (!sim){
+                    cout<<"Distance: "<<solved[solved.size()-1]->distance+3470<<endl;}
+                else{cout<<"Minimum Distance: "<<solved[solved.size()-1]->distance<<endl;}}
+            else{
+                if (!sim){
+                    cout<<"Distance: "<<solved[solved.size()-1]->distance+3470<<endl;}
+                else{cout<<"Minimum Distance: "<<solved[solved.size()-1]->distance<<endl;}}}
+    else if (ending!=nullptr){
+                cout<<"start not found"<<endl;
+                exit(1);
+            }else{
+                cout<<"ending not found"<<endl;
+                exit(1);
+            }
+        }
 
 //A helper function that decides whether or not to follow simulation rules or standard rules.
-    
+
 
 void Route::PrntR(bool sim){
     
@@ -259,7 +264,7 @@ void Route::PrntR(bool sim){
         end = "New York";
         Dijkstra(strt, end);}
     
-//My eruption scenario. It toggles the simulation conditions on and provides a sub menu.     
+    //My eruption scenario. It toggles the simulation conditions on and provides a sub menu.
     
 }
 
@@ -306,7 +311,7 @@ void Route::Scenario(){
     cout << endl;
     cout << endl;
     
-
+    
     
     while (choice != 3){
         
@@ -325,33 +330,33 @@ void Route::Scenario(){
             case 2: getFare();
                 break;
             case 3: cout << "Goodbye!" << endl;
-                break; }}
+            break; }}
     
-        
-        
+    
+    
 }
 
 //A BST/linklist hybid creator function that stitches together a slightly modified BST builder and a Linked list
 //build algorthm of my own devising.
 
 void Route::BuildT(){
-
- 
+    
+    
     AddT();
     AddLL();
     
-    PrntT();
+   
     
 }
-    
+
 //Print helper function
 
 void Route::PrntT(){
     
     PrntT(Root);
     
-//Finds first the Leaf containing the city name. Set the leaf to head. Then creates a nodes with the Arrival city name and
-//an airfare pointer 
+    //Finds first the Leaf containing the city name. Set the leaf to head. Then creates a nodes with the Arrival city name and
+    //an airfare pointer
     
 }
 
@@ -359,65 +364,65 @@ void Route::PrntT(Route *snitch){
     
     if(snitch->left != nullptr){
         PrntT(snitch->left);}
-        cout << "City: " << snitch->Dep <<endl;
+    cout << "City: " << snitch->Dep <<endl;
     if(snitch->right !=nullptr){
         PrntT(snitch->right);}
     
 }
 
 
-//BST building algorthm. "newLeaf->next = nullptr" was added to setup the link list additions 
+//BST building algorthm. "newLeaf->next = nullptr" was added to setup the link list additions
 
 void Route::AddT(){
     
-string data;
-ifstream inputFile;
-inputFile.open("City.txt");
+    string data;
+    ifstream inputFile;
+    inputFile.open("City.txt");
     
     
-while (getline(inputFile, data, ',').good()){
-            
-            Route *newLeaf = new Route;
-            //Build Algo
-    
-            //load up the leaf with values
-            
-            newLeaf->Dep = data;
+    while (getline(inputFile, data, ',').good()){
         
+        Route *newLeaf = new Route;
+        //Build Algo
+        
+        //load up the leaf with values
+        
+        newLeaf->Dep = data;
+        
+        
+        
+        
+        newLeaf->left = nullptr;
+        newLeaf->right = nullptr;
+        newLeaf->parent = nullptr;
+        newLeaf->next = nullptr;
+        bool inserted = false;
+        current = Root;
+        while(!inserted){
             
             
-    
-            newLeaf->left = nullptr;
-            newLeaf->right = nullptr;
-            newLeaf->parent = nullptr;
-            newLeaf->next = nullptr;
-            bool inserted = false;
-            current = Root;
-            while(!inserted){
+            if (Root != nullptr){
                 
-                
-                if (Root != nullptr){
-                    
-                    if(newLeaf->Dep < current->Dep)
-                        if(current->left != nullptr){
-                            current = current->left;
-                        }
+                if(newLeaf->Dep < current->Dep)
+                    if(current->left != nullptr){
+                        current = current->left;
+                    }
+                    else{
+                        current->left = newLeaf;
+                        newLeaf->parent = current;
+                        inserted = true;}
+                    else{
+                        if(current->right != nullptr){
+                            current = current->right;}
                         else{
-                            current->left = newLeaf;
+                            current->right = newLeaf;
                             newLeaf->parent = current;
-                            inserted = true;}
-                        else{
-                            if(current->right != nullptr){
-                                current = current->right;}
-                            else{
-                                current->right = newLeaf;
-                                newLeaf->parent = current;
-                                inserted = true;}}}
-                else{Root = newLeaf; inserted = true;}}
-    getline(inputFile, data);
+                            inserted = true;}}}
+            else{Root = newLeaf; inserted = true;}}
+        getline(inputFile, data);
     }
-        
-}
+    
+inputFile.close();}
 
 
 //My custom Linked List script. It stitches a linked list to the proper leaf in the BST.
@@ -431,34 +436,34 @@ void Route::AddLL(){
     Route *current = nullptr;
     
     while(getline(inputFile, data, ',').good()){
-    
-    current = search(data);
-    
-    if (current->next == nullptr){
         
-    
-        Route *newNode = new Route;
-        newNode->next = nullptr;
-        getline(inputFile, data, ',');
-        newNode->Arr = data;
-        getline(inputFile, data, ',');
-        newNode->Fare = data;
+        current = search(data);
         
-        current->next = newNode;}
-    else{
-        while(current->next != nullptr){
-            current = current->next;}
-        Route *newNode = new Route;
-        newNode->next = nullptr;
-        getline(inputFile, data, ',');
-        newNode->Arr = data;
-        getline(inputFile, data, ',');
-        newNode->Fare = data;
-        
-        current->next = newNode;}
-    getline(inputFile, data);}
-    }
-    
+        if (current->next == nullptr){
+            
+            
+            Route *newNode = new Route;
+            newNode->next = nullptr;
+            getline(inputFile, data, ',');
+            newNode->Arr = data;
+            getline(inputFile, data, ',');
+            newNode->Fare = data;
+            
+            current->next = newNode;}
+        else{
+            while(current->next != nullptr){
+                current = current->next;}
+            Route *newNode = new Route;
+            newNode->next = nullptr;
+            getline(inputFile, data, ',');
+            newNode->Arr = data;
+            getline(inputFile, data, ',');
+            newNode->Fare = data;
+            
+            current->next = newNode;}
+        getline(inputFile, data);}
+inputFile.close();}
+
 
 
 
@@ -495,7 +500,7 @@ void Route::getFare(){
     else{
         cout << "Ticket cost " << "$" << sum << endl;
     }
-        
+    
     
     
 }
@@ -512,13 +517,24 @@ void Route::Sum(string dep, string arr){
         snitch = snitch->next;}
     sum = sum + stoi(snitch->next->Fare);
 }
+
+
+
     
 
 
-
-
-
-
+void Route::deltree(Route *target){
+    
+    
+    if (target == nullptr ){
+        return;}
+    
+    
+    deltree(target->left);
+    
+    deltree(target->right);
+    cout << "Deleting: " << target->Dep << endl;
+    delete target;}
 
 
 
